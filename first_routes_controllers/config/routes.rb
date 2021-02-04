@@ -10,4 +10,7 @@ Rails.application.routes.draw do
   get 'users/:id', to: 'users#show', as: 'user'
   put 'users/:id', to: 'users#update'
   delete 'users/:id', to: 'users#destroy'
+
+  resources :artworks, except: [:new, :edit]
+  resources :artwork_shares, except: [:new, :edit]
 end
