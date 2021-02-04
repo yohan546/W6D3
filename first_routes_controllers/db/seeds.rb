@@ -9,7 +9,7 @@
 User.destroy_all
 
 
-david = User.create!(name: "David", email: "david@gmail.com")
-josh = User.create!(name: "Josh", email: "josh@gmail.com")
-andy = User.create!(name: "Andy", email: "andy@gmail.com")
-valerie = User.create!(name: "Valerie", email: "valerie@gmail.com")
+david = User.create!(username: "David")
+josh = User.create!(username: "Josh")
+andy = User.create!(username: "Andy")
+valerie = User.create!(username: "Valerie")

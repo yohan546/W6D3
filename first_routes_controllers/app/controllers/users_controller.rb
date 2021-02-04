@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
     def create 
         # render json: params
-        user = User.new(params.require(:user).permit(:name,:email))
+        user = User.new(user_params)
         # replace the `user_attributes_here` with the actual attribute keys
         if user.save
             render json: user
@@ -17,8 +17,32 @@ class UsersController < ApplicationController
     end
 
     def show 
-        # user = User.find(params[:id])
-        # render json: user
-        render json: params
+        user = User.find(params[:id])
+        render json: user
+        # render json: params
     end
+
+    def update
+        # update looks similar to create, but instead of instantiating a new tweet to save to the database, we'll lookup the tweet we want to update in the database using the wildcard from the Url, which we find in the params object
+            user = User.find(params[:id])
+           
+            if user.update(user_params)
+     
+                redirect_to users_url(user)
+            else
+                render json: user.errors.full_messages, status: :unprocessable_entity
+            end
+       end
+
+    def user_params 
+        params.require(:user).permit(:username)
+    end
+
+    def destroy
+        user = User.find(params[:id])
+        user.destroy
+        redirect_to users_url
+    end
+
+
 end
